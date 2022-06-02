@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<!--    配置spring 工厂。父容器
+父工厂（容器）（ContextLoaderListener),读取spring.xml
+			完成与非SpringMVC相关对象的创建：连接池、DAO、Service、事务、MQ、ES、Redis等
+
+			工厂（容器）在需要获取对象进行操作时，首先获取子容器中所创建的对象，如果没有继续获得父容器中所创建的对象
+
+			解决父子工厂（容器）的开发方式，Service层没有添加事务：
+			父工厂只扫描除mvc的组件。子工厂只扫描mvc的组件
+-->
+
+    <context:component-scan base-package="com.bh">
+<!--        只负责扫描除mvc以外的组件-->
+        <context:exclude-filter type="aspectj" expression="com.bh.controller.*"/>
+    </context:component-scan>
+
+<!--    数据库连接池交给spring去管理-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/ems?useSSL=false&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+<!--   sqlSessionFactoryBean 交给spring工厂管理
+        原来mybatis中sqlSessionFactory的构建是需要素材的：sqlMapConfig.xml中的内容
+        使用set注入进去
+-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.bh.entity"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/bh/mapper/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+<!--    Mapper动态代理对象交给spring管理，我么从spring容器中获得Mapper代理对象-->
+<!--    扫描mapper接口，生成代理对象，生成的代理对象会存储在IOC容器中-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
+<!--        mapper接口包路径设置-->
+        <property name="basePackage" value="com.bh.dao"/>
+    </bean>
+
+<!--    事务交给spring 工厂去管理-->
+    <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+<!--    事务管理注解驱动  @Transactional-->
+    <tx:annotation-driven transaction-manager="dataSourceTransactionManager"/>
+</beans>

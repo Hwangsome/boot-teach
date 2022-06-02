@@ -9,26 +9,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bh</groupId>
-    <artifactId>boot</artifactId>
+    <artifactId>boot-teach</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>boot</name>
     <packaging>pom</packaging>
     <modules>
-        <module>boot-base</module>
-        <module>boot-mybatisplus</module>
-        <module>boot-mybatis-web</module>
         <module>spring-springmvc</module>
-        <module>spring-mybatis</module>
-        <module>boot-springsecurity</module>
-        <module>boot-redis</module>
-        <module>boot-kafka</module>
-        <module>boot-jdbc</module>
-        <module>Design-Patterns</module>
-        <module>boot-mvc</module>
-        <module>spi-demo</module>
-        <module>spring-mvc-source-test</module>
-        <module>spring-source-test</module>
-        <module>kotlin</module>
     </modules>
     <description>Demo project for Spring Boot</description>
     <properties>
