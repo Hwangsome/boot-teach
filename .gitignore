@@ -2,3 +2,4 @@
 
 */*.iml
 /.idea/
+/apache-lib/avro/target/

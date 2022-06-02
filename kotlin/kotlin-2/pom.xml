@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>kotlin</artifactId>
+        <groupId>com.bh</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>kotlin-2</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <protobuf.version>3.17.2</protobuf.version>
+        <grpc.version>1.42.1</grpc.version>
+        <grpc.kotlin.version>1.1.0</grpc.kotlin.version>
+        <arrowfx.version>1.0.1</arrowfx.version>
+    </properties>
+    <description>kotlin grpc</description>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.arrow-kt</groupId>
+                <artifactId>arrow-stack</artifactId>
+                <version>${arrowfx.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+
+        <dependency>
+            <groupId>io.arrow-kt</groupId>
+            <artifactId>arrow-core</artifactId>
+            <version>${arrowfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+
+        <!--        kotlin 对jason的支持-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>2.9.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+    </dependencies>
+    <!--https://www.baeldung.com/kotlin/grpc-->
+    <!--        要在我们的代码中使用这些 proto 文件，我们必须创建它们的存根。为了实现这个目标，我们将使用协议缓冲区编译器protoc：
+             此外，我们还有一个更简单的选择——将这个存根创建步骤嵌入到我们的pom.xml中,如下：
+  -->
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                        <configuration>
+                            <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                            <pluginId>grpc-java</pluginId>
+                            <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                            <protocPlugins>
+                                <protocPlugin>
+                                    <id>GrpcKotlinGenerator</id>
+                                    <groupId>io.rouz</groupId>
+                                    <artifactId>grpc-kotlin-gen</artifactId>
+                                    <version>0.0.6</version>
+                                    <mainClass>io.rouz.grpc.kotlin.GrpcKotlinGenerator</mainClass>
+                                </protocPlugin>
+                            </protocPlugins>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>compile-kt</id>
+                        <goals>
+                            <goal>compile-custom</goal>
+                        </goals>
+                        <configuration>
+                            <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                            <outputDirectory>${project.build.directory}/generated-sources/protobuf/kotlin</outputDirectory>
+                            <pluginId>kotlin</pluginId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/target/generated-sources/protobuf/grpc-kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/target/generated-sources/protobuf/grpc-java</sourceDir>
+                                <sourceDir>${project.basedir}/target/generated-sources/protobuf/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-opt-in=kotlin.RequiresOptIn</arg>
+                    </args>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+</project>
