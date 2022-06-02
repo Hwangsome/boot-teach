@@ -1,0 +1,10 @@
+
+@namespace("com.bhuang.avro.model")
+protocol Student {
+
+	record StudentEntity {
+		int id;
+		string name;
+		int age;
+	}
+}
