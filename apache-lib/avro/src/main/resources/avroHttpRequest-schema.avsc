@@ -1,0 +1,51 @@
+{
+  "type":"record",
+  "name":"AvroHttpRequest",
+  "namespace":"com.bhuang.avro.model",
+  "fields":[
+    {
+      "name":"requestTime",
+      "type":"long"
+    },
+    {
+      "name": "id",
+      "type":["null", "string"]
+    },
+    {
+      "name":"clientIdentifier",
+      "type":{
+        "type":"record",
+        "name":"ClientIdentifier",
+        "fields":[
+          {
+            "name":"hostName",
+            "type":"string"
+          },
+          {
+            "name":"ipAddress",
+            "type":"string"
+          }
+        ]
+      }
+    },
+    {
+      "name":"employeeNames",
+      "type":{
+        "type":"array",
+        "items":"string"
+      },
+      "default":null
+    },
+    {
+      "name":"active",
+      "type":{
+        "type":"enum",
+        "name":"Active",
+        "symbols":[
+          "YES",
+          "NO"
+        ]
+      }
+    }
+  ]
+}
