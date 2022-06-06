@@ -11,6 +11,7 @@
     <description>
         test.1
         test.2
+        test.3
     </description>
     <groupId>com.bh</groupId>
     <artifactId>boot-teach</artifactId>
