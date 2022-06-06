@@ -10,6 +10,7 @@
     </parent>
     <description>
         test.1
+        test.2
     </description>
     <groupId>com.bh</groupId>
     <artifactId>boot-teach</artifactId>
