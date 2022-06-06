@@ -9,6 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <description>
+        test.1
+        test.2
+        test.3
     </description>
     <groupId>com.bh</groupId>
     <artifactId>boot-teach</artifactId>
@@ -22,7 +25,6 @@
         <module>apache-lib</module>
         <module>kotlin</module>
     </modules>
-    <description>Demo project for Spring Boot</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
