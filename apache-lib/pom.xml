@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>avro</module>
+        <module>log4j2</module>
     </modules>
 
     <properties>
