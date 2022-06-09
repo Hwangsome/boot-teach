@@ -3,21 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>apache-lib</artifactId>
+        <artifactId>boot-teach</artifactId>
         <groupId>com.bh</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <description>
+        https://juejin.cn/post/6844904166809157639
+        https://www.liangzl.com/get-article-detail-201778.html
+    </description>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>log4j2</artifactId>
+
+    <artifactId>jackson</artifactId>
 
     <properties>
         <spring.boot-version>2.6.7</spring.boot-version>
     </properties>
-    <description>
-        https://www.cnblogs.com/keeya/p/10101547.html
-        https://logging.apache.org/log4j/2.x/manual/migration.html
-        https://www.slf4j.org/legacy.html
-    </description>
 
     <dependencyManagement>
         <dependencies>
@@ -31,10 +31,18 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+<!--
+当然了，jackson-databind 依赖 jackson-core 和 jackson-annotations，所以可以只显示地添加jackson-databind依赖，jackson-core 和 jackson-annotations 也随之添加到 Java 项目工程中。
+-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+<!--        log-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-<!--            springboot 默认使用的是slf4j（门面接口） + logback（实现类） 现在排除掉logback 使用log4j2-->
+            <!--            springboot 默认使用的是slf4j（门面接口） + logback（实现类） 现在排除掉logback 使用log4j2-->
             <exclusions>
                 <exclusion>
                     <artifactId>spring-boot-starter-logging</artifactId>
@@ -42,7 +50,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<!--      使用log4j2  -->
+        <!--      使用log4j2  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
@@ -51,11 +59,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+<!--        log4j2 使用yaml配置-->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>2.11.3</version>
         </dependency>
+<!--        slf4j-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -65,17 +75,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
     </dependencies>
 
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
