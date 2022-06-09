@@ -9,4 +9,10 @@ fun main() {
     for ((key, value) in beforeMap) {
         println("key:$key, value:$value")
     }
+
+    val result= listOf("1","2","3","4","5").map {
+        it+"a"
+    }.filter {
+        it.contains("1")
+    }
 }
