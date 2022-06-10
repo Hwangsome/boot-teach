@@ -3,3 +3,4 @@
 */*.iml
 /.idea/
 /apache-lib/avro/target/
+/kotlin/kotlin-1/target/
