@@ -26,6 +26,7 @@
         <module>kotlin</module>
         <module>jackson</module>
         <module>DesignPattern</module>
+        <module>boot-boot</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
