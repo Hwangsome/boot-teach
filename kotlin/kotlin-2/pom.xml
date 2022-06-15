@@ -19,7 +19,9 @@
         <grpc.kotlin.version>1.1.0</grpc.kotlin.version>
         <arrowfx.version>1.0.1</arrowfx.version>
     </properties>
-    <description>kotlin grpc</description>
+    <description>kotlin grpc
+        https://retroryan8080.gitlab.io/grpc-java-workshop/exercise7/propigation.html
+    </description>
 
     <dependencyManagement>
         <dependencies>

@@ -18,7 +18,9 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>boot-01</module>
-		<module>boot-01</module>
+		<module>boot-02</module>
+		<module>boot-03</module>
+		<module>boot-04</module>
 	</modules>
 
 	<dependencyManagement>

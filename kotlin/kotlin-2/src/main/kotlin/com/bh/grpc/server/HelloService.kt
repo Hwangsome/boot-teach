@@ -3,6 +3,7 @@ package com.bh.grpc.server
 import com.bh.grpc.helloworld.HelloReply
 import com.bh.grpc.helloworld.HelloRequest
 import com.bh.grpc.helloworld.HelloServiceGrpcKt
+import com.bh.grpc.interceptor.MyServerInterceptor
 import com.bh.grpc.server.HelloService
 import io.grpc.ServerBuilder
 
@@ -16,6 +17,7 @@ fun helloServer() {
     val server = ServerBuilder
         .forPort(15001)
         .addService(helloService)
+        .intercept(MyServerInterceptor())
         .build()
 
     Runtime.getRuntime().addShutdownHook(Thread {
