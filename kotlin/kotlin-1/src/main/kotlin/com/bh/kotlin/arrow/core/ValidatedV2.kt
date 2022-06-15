@@ -191,7 +191,9 @@ fun main(): Unit = runBlocking {
 
     val list1 = listOf(1, 2, 3)
     val list2 = listOf(1, 2, 3)
+//    zipList:[(1, 1), (2, 2), (3, 3)]
     val zipList = list1 zip list2
+//    zipList:[1=>1, 2=>2, 3=>3]
     val zipList2 = list1.zip(list2) { a, b ->
         "$a=>$b"
     }
@@ -213,5 +215,14 @@ fun main(): Unit = runBlocking {
 
     val createUser1 =createUser1(1,"1")
     println("createUser1:$createUser1")
+
+    val result2 = EventId2.create(1).zip(
+        Organizer2.create("1"),
+        Title2.create("1"),
+    ){
+        eventId2, organizer2,title2 ->
+        Event2(eventId2,organizer2,title2,date())
+    }
+    println("result2 = ${result2}")
 }
 
