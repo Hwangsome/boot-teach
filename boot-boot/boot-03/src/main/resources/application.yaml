@@ -6,3 +6,17 @@ logging:
 hello:
   prefix: sawadika
   suffix: 你好
+
+retry:
+  maxAttempts: 5
+
+
+
+
+
+
+
+
+
+
+

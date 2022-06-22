@@ -11,7 +11,11 @@
 	<artifactId>boot-04</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>boot-04</name>
-	<description>springboot 自定义启动器</description>
+	<description>springboot 自定义启动器
+
+		1. yml与类对应的配置方法 @ConfigurationProperties
+		2. SpringBoot使用@ConstructorBinding注解进行配置属性绑定
+	</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
