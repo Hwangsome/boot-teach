@@ -27,6 +27,8 @@
         <module>jackson</module>
         <module>DesignPattern</module>
         <module>boot-boot</module>
+        <module>reactor-netty</module>
+        <module>java8-stream</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
