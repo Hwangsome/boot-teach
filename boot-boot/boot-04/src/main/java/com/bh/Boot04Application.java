@@ -6,7 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan("com.bh.properties")
+//@ConfigurationPropertiesScan("com.bh.properties")
+@EnableConfigurationProperties
 public class Boot04Application {
 
 	public static void main(String[] args) {

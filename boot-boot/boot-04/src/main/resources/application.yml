@@ -1,3 +1,9 @@
 author:
   name: "John Doe"
   age: 30
+
+statsd:
+  prefix: dts.
+  host: localhost
+  port: 8127
+  systemMetricsEnabled: true

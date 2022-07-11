@@ -22,7 +22,9 @@
 		<module>boot-03</module>
 		<module>boot-04</module>
         <module>boot-05</module>
-    </modules>
+		<module>boot-06</module>
+		<module>boot-07</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

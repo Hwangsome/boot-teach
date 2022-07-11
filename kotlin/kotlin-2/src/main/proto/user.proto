@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package com.bh.grpc.user;
+
+option java_multiple_files = true;
+
+service UserService {
+  rpc getUser (GetUserRequest) returns (GetUserResponse) {}
+}
+
+message UserInfoContract{
+  string id = 1;
+  string name = 2;
+  repeated Hobby hobby = 3;
+  Sex sex =4;
+  int32 age =5;
+
+}
+
+message Hobby {
+  string id =1;
+  string hobby_name = 2;
+}
+
+message Sex {
+  oneof sexType {
+    Male male =4;
+    Female female =5;
+  }
+}
+
+
+message Male {
+  string name = 1;
+}
+
+message Female {
+  string name = 1;
+}
+
+
+message GetUserRequest {
+  string name = 1;
+}
+
+message GetUserResponse {
+  string message = 1;
+}

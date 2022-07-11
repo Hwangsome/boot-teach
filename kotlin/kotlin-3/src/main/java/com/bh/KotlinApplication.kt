@@ -2,7 +2,6 @@ package com.bh
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
 /**
@@ -14,8 +13,6 @@ import org.springframework.boot.runApplication
 @ConfigurationPropertiesScan
 class KotlinApplication
 
-
 fun main(args: Array<String>) {
-
     runApplication<KotlinApplication>(*args)
 }
