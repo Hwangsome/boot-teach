@@ -1,18 +1,28 @@
 package com.bh.config
 
-import org.junit.jupiter.api.Assertions.*
+import io.micrometer.core.instrument.Clock
+import io.micrometer.core.instrument.Counter
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.core.env.Environment
+
 
 @SpringBootTest
-class MetricsConfigTest(){
-
-
+class MetricsConfigTest() {
 
     @Test
-    fun testmetricsCustomizer(){
-        println("a")
+    fun testmetricsCustomizer() {
+        val simpleMeterRegistry = SimpleMeterRegistry()
+//        Metrics.addRegistry(simpleMeterRegistry)
+//        Metrics.counter("objects.instance").increment()
+        val counter: Counter = Counter
+            .builder("instance")
+            .description("indicates instance count of the object")
+            .tags("dev", "performance")
+            .register(simpleMeterRegistry)
+        counter.increment()
+        println(counter.count())
+
+        println(Clock.SYSTEM.monotonicTime())
     }
 }

@@ -1,7 +1,19 @@
 server:
   port: 8989
 management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health,info,metrics,prometheus,loggers
   metrics:
     export:
       statsd:
         enabled: true
+spring:
+  application:
+    name: kotlin-5
+
