@@ -13,6 +13,9 @@
     <artifactId>boot-07</artifactId>
 
     <description>测试spring事务</description>
+    <properties>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -74,6 +77,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bh</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>
