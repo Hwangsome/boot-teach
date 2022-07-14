@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 @RestController
@@ -74,7 +75,54 @@ class MetricsController @Autowired constructor(
         TimeUnit.SECONDS.sleep(2)
         timer.stop(meterRegistry.timer("my.timer", "region", "test"))
 
-        //meterRegistry.timer("request.time.order", "user", "requesttime").record(2, TimeUnit.SECONDS)
+        // meterRegistry.timer("request.time.order", "user", "requesttime").record(2, TimeUnit.SECONDS)
         return ResponseEntity.ok("")
+    }
+
+    /**
+     * http://localhost:8989/metrics
+     * http://localhost:8989/metrics/api.request.latency.percentile
+     {
+     "name": "api.request.latency.percentile",
+     "description": null,
+     "baseUnit": "milliseconds",
+     "measurements": [
+     {
+     "statistic": "VALUE",
+     "value": 0
+     }
+     ],
+     "availableTags": [
+     {
+     "tag": "phi",
+     "values": [
+     "0.99",
+     "0.9",
+     "0.95",
+     "0.5"
+     ]
+     },
+     {
+     "tag": "service",
+     "values": [
+     "B"
+     ]
+     }
+     ]
+     }
+     */
+    @GetMapping("/test3")
+    fun testTp(): ResponseEntity<String> {
+        val latencyTimer = Timer.builder("api.request.latency")
+            .publishPercentiles(0.50, 0.90, 0.95, 0.99)
+            .publishPercentileHistogram()
+            .serviceLevelObjectives(Duration.ofMillis(1))
+            .minimumExpectedValue(Duration.ofMillis(1))
+            .maximumExpectedValue(Duration.ofMillis(300))
+            .tags("service", "B")
+            .register(meterRegistry)
+
+        latencyTimer.record(2, TimeUnit.SECONDS)
+        return ResponseEntity.ok("test3")
     }
 }

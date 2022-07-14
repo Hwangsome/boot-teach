@@ -15,6 +15,10 @@
         1.@PostConstruct https://blog.csdn.net/youanyyou/article/details/104284728
         2.@Qualifier
     </description>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

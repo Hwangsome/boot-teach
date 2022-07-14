@@ -12,7 +12,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 @ConfigurationPropertiesScan
 class KotlinApplication
-fun main(args: Array<String>) {
 
+fun main(args: Array<String>) {
     val runApplication = runApplication<KotlinApplication>(*args)
 }
