@@ -12,8 +12,8 @@
     <artifactId>kafka-2</artifactId>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <swagger.version>3.0.0</swagger.version>
     </properties>
 

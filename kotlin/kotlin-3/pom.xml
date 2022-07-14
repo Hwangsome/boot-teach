@@ -14,9 +14,10 @@
     <description>
         kotlin整合springboot
     </description>
+
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <kotlin.version>1.6.20-M1</kotlin.version>
     </properties>
 
